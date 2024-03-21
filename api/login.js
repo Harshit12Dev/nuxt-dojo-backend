@@ -9,14 +9,14 @@ const User = require("../model/user");
 router.post("/", async (req, res) => {
   try {
     // Extract username and password from request body
-    const { username, password } = req.body;
-
+    const { email, password } = req.body;
+    console.log(req.body);
     // Find user in the database by username
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
 
     // If user not found, send error response
     if (!user) {
-      return res.status(401).json({ message: "Invalid username or password" });
+      return res.status(401).json({ message: "Invalid EMAIL or password" });
     }
     // Compare provided password with hashed password stored in the database
     const isPasswordValid = await bcrypt.compare(password, user.password);
