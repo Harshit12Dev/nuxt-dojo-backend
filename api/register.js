@@ -5,9 +5,9 @@ const bcrypt = require("bcrypt");
 
 // Register endpoint
 router.post("/", async (req, res) => {
-  console.log("Api called");
   try {
     // Extract user data from request body
+
     const { username, email, password } = req.body;
 
     // Check if the username or email is already in use
@@ -34,11 +34,13 @@ router.post("/", async (req, res) => {
     // Save the user to the database
     await newUser.save();
 
-    res.status(201).json({ message: "User registered successfully" });
+    res
+      .status(201)
+      .json({ status: 201, message: "User registered successfully" });
   } catch (error) {
-    console.log("error");
-    console.error("Error registering user:", error);
-    res.status(500).json({ error: "Error registering user" });
+    res
+      .status(500)
+      .json({ error: "Error registering user", msg: error.message });
   }
 });
 

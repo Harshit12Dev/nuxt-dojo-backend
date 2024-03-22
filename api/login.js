@@ -10,13 +10,12 @@ router.post("/", async (req, res) => {
   try {
     // Extract username and password from request body
     const { email, password } = req.body;
-    console.log(req.body);
     // Find user in the database by username
     const user = await User.findOne({ email });
 
     // If user not found, send error response
     if (!user) {
-      return res.status(401).json({ message: "Invalid EMAIL or password" });
+      return res.status(401).json({ message: "Invalid Email or password" });
     }
     // Compare provided password with hashed password stored in the database
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -32,7 +31,7 @@ router.post("/", async (req, res) => {
     });
 
     // Send token in the response
-    res.json({ token });
+    res.json({ token: token, ...req.body });
   } catch (error) {
     console.error("Error logging in user:", error);
     res.status(500).json({ message: "Internal server error" });
