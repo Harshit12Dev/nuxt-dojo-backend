@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 async function connectDB() {
   try {
     await mongoose.connect(
-      "mongodb+srv://harshitsampat:fCS34s4IdGEXb7MU@cluster0.dcenmeg.mongodb.net/shecom"
+      "mongodb+srv://harshitsampat:zYuDU6kYTFIvcLvX@cluster0.fezzfq5.mongodb.net/shecom"
     );
     console.log("Connected to MongoDB");
   } catch (error) {
